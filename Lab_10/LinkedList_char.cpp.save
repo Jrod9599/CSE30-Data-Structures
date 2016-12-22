@@ -1,0 +1,158 @@
+#include "LinkedList_char.h"
+#include <iostream>
+
+using namespace std;
+
+LinkedList::LinkedList(){
+	first = NULL;
+	last = NULL;
+}
+
+LinkedList::~LinkedList(){
+	clear();
+}
+
+void LinkedList::insertAtBack(char valueToInse
+	Node* newNode = new Node;
+	newNode->val = valueToInsert;
+	newNode->next = NULL;
+	// Update proper pointers
+	if (last != NULL) {
+		last->next = newNode;
+	}
+	else {
+		// List was empty, newNode is now the first.
+		first = newNode;
+	}
+	// Last should always be updated to newNode.
+	last = newNode;
+}
+bool LinkedList::removeFromBack(){
+	if (last == NULL) {
+		// List is empty, removal failure.
+		return false;
+	}
+	// List is not empty.
+	// Two cases: list has one node, or at least two nodes.
+	if (last != first) {
+		// If first and last are not the same, there are at least 
+two nodes.
+		// "temp" will help us find the node before the current 
+last node - the one that will become the new last after we remove a node.
+		Node* temp = new Node;
+		temp = first;
+		// The following while loop will
+		// stop when temp is pointing at
+		// the second-to-last node.
+		while (temp->next->next != NULL) {
+			// We already know that there are at least two 
+nodes.
+			temp = temp->next;
+		}
+		last = temp;
+		delete temp->next;
+		temp->next = NULL;
+		return true;
+	}
+	else {
+		// There is exactly one node.
+		delete first;
+		first = NULL;
+		last = NULL;
+		return true;
+	}
+}
+void LinkedList::print(){
+	// Print format is:
+	// #,#,#,#,#
+	// No spaces before or between
+	Node* temp = new Node;
+	temp = first;
+	while (temp != NULL) {
+		cout << temp->val;
+		// Only print a comma if there is more after this one.
+		if (temp->next != NULL) {
+			cout << ",";
+		}
+		temp = temp->next;
+	}
+}
+bool LinkedList::isEmpty(){
+	// first==NULL is true when list is empty, hence return true when 
+list is empty.
+	return (first == NULL);
+}
+int LinkedList::size(){
+	if (first == last) {
+		// Either empty list or one node.
+		if (first == NULL) {
+			// List is empty.
+			return 0;
+		}
+		else {
+			// List has one node.
+			return 1;
+		}
+	}
+	else {
+		// At least 2 nodes.
+		int size = 1;
+		Node* temp = new Node;
+		temp = first;
+		while (temp->next != NULL){
+			// As long as there is another node, size++ and 
+increment temp.
+			size++;
+			temp = temp->next;
+		}
+		return size;
+	}
+}
+void LinkedList::clear(){
+	Node*temp = new Node;
+	while (first != NULL) {
+		temp = first->next;
+		delete first;
+		first = temp;
+	}
+	first = NULL;
+	last = NULL;
+}
+void LinkedList::insertAtFront(char valueToInsert){
+	// Create new node.
+	Node* newNode = new Node;
+	// Assign value to new node's val.
+	newNode->val = valueToInsert;
+	// Assign first to new node's next.
+	newNode->next = first;
+	// Update proper pointers
+	// First should always be updated to newNode.
+	first = newNode;
+}
+bool LinkedList::removeFromFront(){
+	if (first == NULL) {
+		// List is empty, removal failure.
+		return false;
+	}
+	// List is not empty.
+	// Two cases: list has one node, or at least two nodes.
+	if (last != first) {
+		// If first and last are not the same, there are at least 
+two nodes.
+		// "temp" will mark the second node for us.
+		Node* temp = new Node;
+		temp = first->next;
+		// Now just get rid of the first node, and make first 
+point at temp.
+		delete first;
+		first = temp;
+		return true;
+	}
+	else {
+		// There is one node.
+		delete first;
+		first = NULL;
+		last = NULL;
+		return true;
+	}
+}

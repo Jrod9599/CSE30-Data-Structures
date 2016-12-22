@@ -1,0 +1,37 @@
+#include <iostream>
+#include<fstream>
+using namespace std;
+
+int checkArraySort(int a[],int  array_max, int first, int last){
+
+}
+
+int main(){
+
+        const int array_max=20;
+        int arr[array_max];
+       
+
+        cout << "Enter beggining position to output: " << endl;
+        int start, finish;
+        cin >> start;
+        cout << "Enter ending postition to output: " << endl;
+        cin >> finish;
+
+        ifstream file;
+        file.open("in.txt");
+
+        if(file.is_open()) {
+                for(int i = 0; i < array_max; i++){
+                        getline(file,line);
+                        arr[i]=*line;
+                }
+                file.close();
+        }
+        else
+                cout << "Unable to open file";
+
+	cout << arr[5] <<endl;
+        return 0;
+}
+

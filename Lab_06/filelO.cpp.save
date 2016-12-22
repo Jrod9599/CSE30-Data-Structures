@@ -1,0 +1,27 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main(){
+
+	string array[20];
+
+	ifstream file2;
+	file2.open("in.txt");
+
+	ofstream file1;
+	file1.open("out.txt");
+
+	for( int i = 0; i < array_max+1; i++)
+	//this reads in.txt
+		{
+      		file2 >> array[i];
+		}
+	for( int i = first; i < last+1; i++)
+	//this write on out.txt according to the input for begin and end
+		{
+         	file1 << array[i]<<endl;
+		}
+
+return 0;
+}
